@@ -4,7 +4,7 @@
 
 int main()
 {
-	int a,n,i=0,max;
+	int a,n,i=0,max=0;
 	int array[100];
 	
 	do
@@ -23,22 +23,23 @@ int main()
 		array[x]=(array[x]*array[x]);
 		}
 		
-		if (array[x]>=2)
+		else if (array[x]>=2)
 		array[x] = ((array[x]*array[x])+(array[x]*4)+5);
 		
-		if (array[x]<-2)
+		else if (array[x]<-2)
 		array[x]=4;
 		
 	}
-
+	 
 	
-	for (int x=0;x<i;x++)
+	for (int x=0;x<(i-1);x++)
 	{
-		 if (array[x]>=array[x-1])
+		
+		 if (max<=array[x])
 		 max=array[x];
-		 
+
 	}
-	 printf("%i", max);
+	 printf("%i ", max);
 	    
     return 0;
 }
