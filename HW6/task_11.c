@@ -4,11 +4,16 @@
 void print_simple(int n)
 {
 	
-	for (int i=1;i<=n;i++)
-	{
-		if ((n%i)==0)
-		printf("%i ", i);
 
+	for (int i=2;i<=f;i++)
+	{
+		
+		if ((f%i)==0)
+		{	
+			f=f/i;
+			printf("%i ", i);
+			--i;
+		}
 	}
 
 }
