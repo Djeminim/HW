@@ -3,7 +3,7 @@
 
 void print_simple(int n)
 {
-	
+	int f;
 
 	for (int i=2;i<=f;i++)
 	{
