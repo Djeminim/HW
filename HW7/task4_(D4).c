@@ -6,8 +6,8 @@ void print_num(void)
 	int c;
 	if ((c=getchar()) != '\n')
 	print_num();
-	if (c != '\n')
 	putchar(c);
+	
 }
 int main()
 {
