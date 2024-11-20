@@ -7,16 +7,15 @@ int sum_digits(int n)
 	static int c=0;
 	int i;
 	
-	if (n>=0)
+	if (n>0)
 	{
 		i=n%10;
 		n=n/10;
-		c=c+i;
-		printf("%i", c);
-		sum_digits(n);
-		
+		c=c+i;		
+		sum_digits(n);		
 	}
 	
+	else printf("%i", c);
 	return c;
 	
 
