@@ -15,12 +15,14 @@ void natur_div(int num)
 			printf("%i ", b);	
 			
 		}
-			if(num%b!=0)
-			b++;
+		
+		if(num%b!=0) b++;
 			
-			natur_div(num);		
-		}
+		natur_div(num);		
+	}
 	
+	if (num==1)
+	printf("%i", num);
 }	
 
 
