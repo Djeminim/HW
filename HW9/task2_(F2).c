@@ -21,38 +21,36 @@ int input_array (int a[], int max_size)
 
 void sort_even_odd(int n, int a[])
 {
-    for (int i = 0; i < n; i++) 
-    {
-        if (a[i]%2 != 0) 
-        {
-            for (int j = i; j < n; j++) 
-            {
-                if (a[j] % 2 == 0) 
-                {
-                    int temp = a[i];
-                    a[i] = a[j];
-                    a[j] = temp;
-                    break;
-                }
-            }
-        }
-    }
+	int i,k,tmp;
+	//static int first_even;
+	for (i=0; i<n; i++)
+	{
+		if (a[i]%2 !=0 )
+		{
+			k=i;
+			
+			while (k<n && a[k]%2!=0)
+			{
+				k++;
+				if (a[k]%2==0)
+				{
+					tmp=a[k];
+				}	
+								
+			}
+			
+			while (k>i)
+			{
+				a[k]=a[k-1];
+				k--;
+			}
+			
+			a[i]=tmp;
+			
+		}
+	}	
 }
 
-void sort_array(int size, int a[])
-{
-	for (int i=1; i<size; i++)
-	{
-		int k=i;
-		while(k>0 && a[k-1] > a[k])
-		{
-			int tmp = a[k-1];
-			a[k-1] = a[k];
-			a[k] = tmp;
-			--k;
-		}
-	}
-}
 
 void print_array (int a[], int n)
 {
