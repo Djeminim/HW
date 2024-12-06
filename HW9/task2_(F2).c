@@ -21,34 +21,47 @@ int input_array (int a[], int max_size)
 
 void sort_even_odd(int n, int a[])
 {
-	int i,k,tmp;
+	static int tmp,k=0,j=0;
+	int i;
+	int odd[n];
+	int even[n];
 	//static int first_even;
+
+	
 	for (i=0; i<n; i++)
 	{
-		if (a[i]%2 !=0 )
+		
+		if (a[i]%2 == 0)
 		{
-			k=i;
-			
-			while (k<n && a[k]%2!=0)
-			{
-				k++;
-				if (a[k]%2==0)
-				{
-					tmp=a[k];
-				}	
-								
-			}
-			
-			while (k>i)
-			{
-				a[k]=a[k-1];
-				k--;
-			}
-			
-			a[i]=tmp;
-			
+			even[k]=a[i];
+			k++;
 		}
-	}	
+		
+		else if (a[i]%2 != 0)
+		{
+			odd[j]=a[i];
+			j++;
+		}
+		
+	}
+	//printf ("k=%d j=%d ", k,j);
+	
+	for (i=0; i<k; i++)
+	{
+		a[i]=even[i];
+		tmp++;
+		
+		//printf ("ev=%d odd=%d ", even[i],odd[i]);
+		
+	}
+		//printf ("tpm=%d ",tmp);
+	for (i=0; i<j; i++)
+	{	
+		a[tmp]=odd[i];
+		tmp++;
+		
+	}
+			
 }
 
 
