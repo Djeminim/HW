@@ -1,74 +1,50 @@
-
-
 #include <stdio.h>
-#include <limits.h>
+#include <string.h>
 
-
-//int input_array (int a[], int max_size)
-//{
-	//int top = 0;
+void print_digit(char s[])
+{
+	int tmp[10] = {0};
+	int i=0;
 	
-	//while (1)
-	//{
-		//int x;
-		//scanf("%i", &x);
-		//if (x==0 || top == max_size) break;
-		//a[top] = x;
-		//top++;
-	//}
-	//return top;
-//}
-
-//void score(int n, int a[])
-//{
+	int size_s = strlen(s);
+	size_t size_tmp = (sizeof(tmp)/sizeof(tmp[0]));
 	
-//}
-
-
-//void print_array (int a[], int n)
-//{
-	//for (int i=0; i<n; i++)
-	//{
-		//printf ("%d ", a[i]);
-	//}
-//}
+	for (i=0; i<size_s; i++)
+	{
+		if (s[i] >= '0' && s[i]<='9')
+		{
+			tmp[(s[i]-'0')]++;	
+		}
+	}
+	
+	
+	
+	for (i=0; i<size_tmp; i++)
+	{
+		if (tmp[i] != 0)
+		{
+			printf("%i %i\n", i,tmp[i]);
+		}
+	}
+}
 
 int main(int argc, char **argv)
 {
-	//int allocate_size = 100;
-	//int a[allocate_size];
-	//int n;
-	
-	//n = input_array(a, allocate_size);
-	//score(n, a);
-	//print_array( a, n);
-	
-	unsigned long int b;
+
 	int i=0;
-	int figure[10] = {0};
-	int tmp [1000] = {0};
-
-	scanf ("%lu", &b);
+	char  s[1000] = {0};
+	char c;
 	
-	if (b == 0)
+	while ((c=getchar()) != '\n')
 	{
-		figure[0]++;
+		s[i]=c;
+		i++;
+
 	}
 	
-	while (b > 0)
-	{
-		figure[b % 10]++;
-		b = b/10;
-	}
-
-		
-	for (i=0; i<10; i++)
-	{
-		if( figure[i]>0 )
-		printf("%i %i\n", i,figure[i]);
-	}
+	print_digit(s);
+	
 	return 0;
 }
-	
 
 

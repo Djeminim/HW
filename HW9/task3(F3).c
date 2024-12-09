@@ -43,30 +43,25 @@ int main(int argc, char **argv)
 	//score(n, a);
 	//print_array( a, n);
 	
-	unsigned long int b;
 	int i=0;
-	int figure[10] = {0};
-	int tmp [1000] = {0};
-
-	scanf ("%s", tmp);
-	printf("%s", tmp[0])
-	if (b == 0)
+	int  tmp [1000] = {0};
+	char c;
+	
+	while ((c=getchar()) != '\n')
 	{
-		figure[0]++;
+		tmp[(c-'0')]++;	
 	}
 	
-	while (b > 0)
-	{
-		figure[b % 10]++;
-		b = b/10;
-	}
-
-		
+	//size_t size_tmp = (sizeof(tmp)/sizeof(tmp[0]));
+	
 	for (i=0; i<10; i++)
 	{
-		if( figure[i]>0 )
-		printf("%i %i\n", i,figure[i]);
+		if (tmp[i] != 0)
+		{
+			printf("%i %i\n", i,tmp[i]);
+		}
 	}
+	
 	return 0;
 }
 	
