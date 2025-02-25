@@ -22,11 +22,22 @@ int main ()
     if(numBlocks == NULL)
     printf("%d", numBlocks);
 
+    //создание связанного списка
     for(int i; i < numBlocks; i++)
     {
         list *newNode = (list*)malloc(sizeof(list));
 
         if (numBlocks == NULL)
-        
+        {
+            fprintf(stderr, "Error memory allocation %d", (i+1));
+
+            list *current = head;
+    
+            while(current != NULL)
+            {
+                list *next = current ->next;
+            }
+        }
+
     }
 }
