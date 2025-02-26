@@ -56,7 +56,7 @@ int main()
         {
             fprintf(stderr, "Memory allocation error for block %d\n", i + 1); // Сообщение об ошибке
 
-            // Освобождаем выделенную память
+            
             list *current = head;
             while (current != NULL)
             {
