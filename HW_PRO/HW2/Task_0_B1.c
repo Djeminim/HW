@@ -56,13 +56,16 @@ int main()
         {
             fprintf(stderr, "Memory allocation error for block %d\n", i + 1); // Сообщение об ошибке
 
-            
+            //деелаем указатель на указатель на начало списка как отправную точку
             list *current = head;
+            
+            //процесс отчиски памяти всех вложенных структур
             while (current != NULL)
             {
+                //записываем в поле структуры next адрес вложенной структуры из текушей структуры
                 list *next = current->next;
-                free(current);
-                current = next;
+                free(current); //очищаем current т.к. его адрес переписан в next
+                current = next; 
             }
             return 1; // Возвращаем код ошибки
         }
@@ -71,7 +74,7 @@ int main()
         scanf("%llu %zu", &newNode->address, &newNode->size);   // Считываем адрес и размер
 
         printf("Enter comment for block %d: ", i + 1); // Запрашиваем комментарий
-        scanf(" %63s", newNode->comment);                // Считываем комментарий (ограничение длины)
+        scanf(" %63s", newNode->comment);// Считываем комментарий (ограничение длины)
 
         newNode->next = NULL; // Указываем, что это последний элемент
 
@@ -94,7 +97,7 @@ int main()
 
     printf("Address of the largest block: %llu\n", maxBlockAddress); // Выводим результат
 
-    // Освобождаем память
+    // Освобождаем память 
     list *current = head;
     while (current != NULL)
     {
