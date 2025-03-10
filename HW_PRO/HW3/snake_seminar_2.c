@@ -5,11 +5,11 @@
 #include <inttypes.h>
 #include <string.h>
 #include <unistd.h>
+#include <stddef.h>  // Убедимся, что stddef.h включен
 
 #define MIN_Y  2
 enum {LEFT=1, UP, RIGHT, DOWN, STOP_GAME=KEY_F(10)};
 enum {MAX_TAIL_SIZE=100, START_TAIL_SIZE=3, MAX_FOOD_SIZE=20, FOOD_EXPIRE_SECONDS=10};
-
 
 // Здесь храним коды управления змейкой
 struct control_buttons
@@ -33,10 +33,10 @@ typedef struct snake_t
 {
     int x;
     int y;
-    int direction;
-    size_t tsize;
-    struct tail_t *tail;
-    struct control_buttons controls;
+    int direction; //текущее направление движения
+    size_t tsize;  // размер хвоста
+    struct tail_t *tail; //указатель на структуру хвоста
+    struct control_buttons controls; //коды клавиш для управления
 } snake_t;
 
 /*
@@ -48,9 +48,9 @@ typedef struct tail_t
     int y;
 } tail_t;
 
-void initTail(struct tail_t t[], size_t size)
+void initTail(struct tail_t t[], size_t size) //size = 100, максимальный размер хвоста
 {
-    struct tail_t init_t={0,0};
+    struct tail_t init_t={0,0}; //зануляем массив из 100 структур циклом for
     for(size_t i=0; i<size; i++)
     {
         t[i]=init_t;
@@ -65,9 +65,10 @@ void initHead(struct snake_t *head, int x, int y)
 
 void initSnake(snake_t *head, size_t size, int x, int y)
 {
-tail_t*  tail  = (tail_t*) malloc(MAX_TAIL_SIZE*sizeof(tail_t));
-    initTail(tail, MAX_TAIL_SIZE);
-    initHead(head, x, y);
+    tail_t*  tail  = (tail_t*) malloc(MAX_TAIL_SIZE*sizeof(tail_t)); //выделяется память под хвост
+    
+    initTail(tail, MAX_TAIL_SIZE);//передаём указатель, на память хвоста tail, и МАX размер хвоста 100 
+    initHead(head, x, y); //head->snake->snake_t -> память структуры, + координаты
     head->tail = tail; // прикрепляем к голове хвост
     head->tsize = size+1;
     head->controls = default_controls;
@@ -78,10 +79,11 @@ tail_t*  tail  = (tail_t*) malloc(MAX_TAIL_SIZE*sizeof(tail_t));
  */
 void go(struct snake_t *head)
 {
-    char ch = '@';
-    int max_x=0, max_y=0;
+    char ch = '>';
+    int max_x=0, max_y=0; //переменные для хранения размер терминала
     getmaxyx(stdscr, max_y, max_x); // macro - размер терминала
-    mvprintw(head->y, head->x, " "); // очищаем один символ
+    mvprintw(head->y, head->x, " "); // очищаем один символ чтобы отчистить предыдущее положение
+
     switch (head->direction)
     {
         case LEFT:
@@ -118,7 +120,7 @@ void changeDirection(struct snake_t* snake, const int32_t key)
 }
 
 /*
- Движение хвоста с учетом движения головы
+    Движение хвоста с учетом движения головы
  */
 void goTail(struct snake_t *head)
 {
@@ -136,15 +138,19 @@ void goTail(struct snake_t *head)
 
 int main()
 {
-snake_t* snake = (snake_t*)malloc(sizeof(snake_t));
-    initSnake(snake,START_TAIL_SIZE,10,10);
+    snake_t* snake = (snake_t*)malloc(sizeof(snake_t)); //выделение памяти на змейку
+    initSnake(snake,START_TAIL_SIZE,10,10); //создание змейки с начальными координатами 10,10
+    
+    //инициализация терминала
     initscr();
     keypad(stdscr, TRUE); // Включаем F1, F2, стрелки и т.д.
-    raw();                // Откдючаем line buffering
+    raw();                // Отключаем line buffering
     noecho();            // Отключаем echo() режим при вызове getch
-    curs_set(FALSE);    //Отключаем курсор
+    curs_set(FALSE);    // Отключаем курсор
     mvprintw(0, 0,"Use arrows for control. Press 'F10' for EXIT");
-    timeout(0);    //Отключаем таймаут после нажатия клавиши в цикле
+    timeout(0);    // Отключаем таймаут после нажатия клавиши в цикле
+
+    //основной бесконечный цикл который не законьчится пока не нажмется STOP_GAME = F10
     int key_pressed=0;
     while( key_pressed != STOP_GAME )
     {
